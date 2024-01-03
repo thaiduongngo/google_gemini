@@ -1,6 +1,11 @@
 # Prerequisites
-You must install python in your machine. Python 3.11 is recommended.\
+### Install python
 *https://www.python.org/downloads/*
+*(Python 3.11 is recommended)*
+### Install PostgreSQL
+*https://www.postgresql.org/download/*
+### Install pgvector extension
+*https://github.com/pgvector/pgvector*
 
 # Create project virtual environment
 Go to project home folder `python -m venv venv` or `python3 -m venv venv`

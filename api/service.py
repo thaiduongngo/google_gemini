@@ -1,12 +1,13 @@
-from genai.configs import LLM_CONFIG
-from genai.llm import qna, reduce
+from genai_llms.configs import LLM_CONFIG
+from genai_llms.llm import qna, reduce
 
 
 def question_and_answer(
     question: str,
     chat_history: [{}] = None
 ) -> {}:
-    return qna(question=question, chat_history=chat_history)
+    q = question.lower()
+    return qna(question=q, chat_history=chat_history)
 
 
 def reduce_document(document: str) -> str:
