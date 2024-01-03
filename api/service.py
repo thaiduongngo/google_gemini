@@ -1,5 +1,5 @@
-from genai_llms.configs import LLM_CONFIG
-from genai_llms.llm import qna, reduce
+from generative_ai.llms.configs import LLM_CONFIG
+from generative_ai.llms.llm import qna, reduce
 
 
 def question_and_answer(

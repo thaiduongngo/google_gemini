@@ -1,14 +1,10 @@
-from dotenv import load_dotenv
 from langchain_core.embeddings import Embeddings
 from langchain_core.language_models import BaseLLM, BaseChatModel
 from langchain_google_genai import GoogleGenerativeAI, GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains.combine_documents.base import BaseCombineDocumentsChain
-from genai_llms.configs import LLM_CONFIG, PROMPTS, PERSISTENCE, SAFETY_SETTINGS
-
-
-load_dotenv()
+from generative_ai.llms.configs import LLM_CONFIG, PROMPTS, PERSISTENCE, SAFETY_SETTINGS
 
 
 def init_input_vars() -> []:
