@@ -1,4 +1,4 @@
-from generative_ai.llms.configs import LLM_CONFIG
+from generative_ai.configs import LLM_CONFIG
 from generative_ai.llms.llm import qna, reduce
 
 

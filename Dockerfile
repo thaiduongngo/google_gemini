@@ -16,7 +16,7 @@ COPY ./.env /app/
 
 COPY generative_ai/__init__.py /app/genai/
 COPY generative_ai/llms/llm.py /app/genai/
-COPY generative_ai/llms/configs.py /app/genai/
+COPY generative_ai/configs.py /app/genai/
 
 WORKDIR /app
 

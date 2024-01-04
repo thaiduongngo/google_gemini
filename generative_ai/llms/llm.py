@@ -4,7 +4,7 @@ from langchain.chains import LLMChain
 from langchain.schema import Document
 from generative_ai.llms import init_embeddings, init_retrieval_template, init_llm, init_qa_chain, \
     init_prompt_template, init_qa_template, init_input_vars, init_output_format
-from generative_ai.llms.configs import LLM_CONFIG, PROMPTS, PERSISTENCE
+from generative_ai.configs import LLM_CONFIG, PROMPTS, PERSISTENCE
 import json
 
 
