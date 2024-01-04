@@ -39,5 +39,15 @@ gunicorn --workers={num_of_workers} --timeout=3600 --bind=0.0.0.0:{port_num} 'ap
 ```
 For example: `gunicorn --workers=2 --timeout=3600 --bind=0.0.0.0:8081 'api.app:create_app()'`
 
+### Use Postman to test API
+```
+[POST] http://localhost:8081/api/chat
+
+Payload:
+{
+    "text_message": "Các điều khoản loại trừ Pru vững chắc" 
+}
+```
+
 # Start Jupyter Notebook
 `jupyter notebook`
