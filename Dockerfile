@@ -1,7 +1,7 @@
 FROM python:3.11.7-slim-bullseye
 
 RUN mkdir -p /app/api
-RUN mkdir -p /app/genai_llms
+RUN mkdir -p /app/generative_ai
 
 ENV APP_HOME='/app'
 
@@ -14,9 +14,9 @@ COPY ./setup.py /app/
 COPY README.md /app/
 COPY ./.env /app/
 
-COPY genai_llms/__init__.py /app/genai/
-COPY genai_llms/llm.py /app/genai/
-COPY genai_llms/configs.py /app/genai/
+COPY generative_ai/__init__.py /app/genai/
+COPY generative_ai/llms/llm.py /app/genai/
+COPY generative_ai/llms/configs.py /app/genai/
 
 WORKDIR /app
 
