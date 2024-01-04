@@ -1,4 +1,7 @@
 # Prerequisites
+### Install git client
+https://git-scm.com/downloads
+
 ### Install python
 *https://www.python.org/downloads/*
 *(Python 3.11 is recommended)*
@@ -6,6 +9,11 @@
 *https://www.postgresql.org/download/*
 ### Install pgvector extension
 *https://github.com/pgvector/pgvector*
+
+# Clone project
+```commandline
+git clone https://github.com/thaiduongngo/google_gemini.git
+```
 
 # Create project virtual environment
 Go to project home folder `python -m venv venv` or `python3 -m venv venv`
