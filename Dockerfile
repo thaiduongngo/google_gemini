@@ -1,22 +1,23 @@
 FROM python:3.11.7-slim-bullseye
 
 RUN mkdir -p /app/api
-RUN mkdir -p /app/generative_ai
+RUN mkdir -p /app/generative_ai/llms
 
 ENV APP_HOME='/app'
 
-COPY ./api/__init__.py /app/api/
-COPY ./api/app.py /app/api/
-COPY ./api/service.py /app/api/
-COPY ./api/routes.py /app/api/
+COPY ./api/__init__.py  /app/api/
+COPY ./api/app.py       /app/api/
+COPY ./api/service.py   /app/api/
+COPY ./api/routes.py    /app/api/
 COPY ./requirements.txt /app/
-COPY ./setup.py /app/
-COPY README.md /app/
-COPY ./.env /app/
+COPY ./setup.py         /app/
+COPY README.md          /app/
+COPY ./.env             /app/
 
-COPY generative_ai/__init__.py /app/genai/
-COPY generative_ai/llms/llm.py /app/genai/
-COPY generative_ai/configs.py /app/genai/
+COPY generative_ai/__init__.py      /app/generative_ai/
+COPY generative_ai/configs.py       /app/generative_ai/
+COPY generative_ai/llms/__init__.py /app/generative_ai/llms/
+COPY generative_ai/llms/llm.py      /app/generative_ai/llms/
 
 WORKDIR /app
 

@@ -26,16 +26,15 @@ def init_output_format() -> {str: str}:
 
 def init_retrieval_template() -> str:
     return '''
-    A text in the List could be mentioned in the Document below.\n
-    Response with a complete text of item in the List if there is a mention referred in the Document;
-    otherwise response None.\n
-    \'Pru\' or \'Pru-\' is a typical prefix to indicate Prudential's products.\n\n
-    List: \n{list}\n
-    
-    Document: \n{document}\n\n
-    The output should be a json formatted in the following schema:\n
-    "context": string  // response
-    '''
+A text in the List could be mentioned in the Document below.\n
+Response with a complete text of item in the List if there is a mention referred in the Document;
+otherwise response None.\n
+\'Pru\' or \'Pru-\' is a typical prefix to indicate Prudential's products.\n\n
+List: \n{list}\n\n
+Document: \n{document}\n\n
+The output should be a json formatted in the following schema:\n
+\"context\": string  // response
+'''
 
 
 def init_qa_template(lang: str = "en") -> str:
