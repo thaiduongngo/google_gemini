@@ -6,6 +6,8 @@ from generative_ai.llms import init_embeddings, init_retrieval_template, init_ll
     init_prompt_template, init_qa_template, init_input_vars, init_output_format
 from generative_ai.configs import LLM_CONFIG, PROMPTS, PERSISTENCE
 import json
+import pandas as pd
+import os
 
 
 HR = "-" * 140
@@ -46,23 +48,13 @@ def semantic_search_with_score(
 
 
 def get_products(as_string: bool = False):
-    products = []
-    products_str = ""
-
-    docs = semantic_search(
-        query=PERSISTENCE["PRODUCTS"],
-        k=50,
-        collection_name=PERSISTENCE["PRODUCTS"],
-    )
-
-    for doc in docs:
-        if as_string:
-            products_str = "{}* {}\n".format(products_str, doc.page_content)
-        else:
-            products.append({"product_name": doc.page_content})
-
+    file_path = os.path.join(os.environ.get("APP_HOME"), "products.csv")
+    products = pd.read_csv(file_path, header=None)[1].tolist()
     if as_string:
-        return products_str
+        products_string = ""
+        for product in products:
+            products_string = "{}* {}\n".format(products_string, product)
+        return products_string
     else:
         return products
 
@@ -83,8 +75,11 @@ def find_relevant_context(document: str) -> {}:
         template=init_retrieval_template()
     )
     llm_chain.verbose = LLM_CONFIG["VERBOSE"]
-    ctx = json.loads(llm_chain.run({"list": products, "document": document}))
-    return ctx
+    res: str = llm_chain.run({"list": products, "document": document})
+    res = res.replace("```json", "").replace("```JSON", "").replace("```", "")
+    if LLM_CONFIG["VERBOSE"]:
+        print(res)
+    return json.loads(res)
 
 
 def reduce(document: str) -> str:
@@ -98,7 +93,7 @@ def qna(question: str, chat_history: [{}] = None) -> {str: str}:
         recent_chat_history = chat_history[LLM_CONFIG["MEMORY_K"] * -1:]
 
     pre_context = get_pre_context(recent_chat_history)
-    context = find_relevant_context(document=question)["context"]
+    context = find_relevant_context(document=question)["response"]
 
     if context == LLM_CONFIG["NULL"]:
         context = pre_context
@@ -121,7 +116,7 @@ def qna(question: str, chat_history: [{}] = None) -> {str: str}:
 
     chain = init_qa_chain(
         init_prompt_template(
-            template=init_qa_template("en"),
+            template=init_qa_template(),
             input_vars=init_input_vars(),
             output_format=init_output_format()
         )

@@ -23,15 +23,23 @@ or
 ```commandline
 python3 -m venv venv
 ```
+*https://docs.python.org/3/library/venv.html*
 
 # Create .env file
-At home folder, create a .env file and append the content `GOOGLE_API_KEY={google_api_key}` into the file.\
+At home folder, create a `.env` file and append the content into the file. You can copy `dotenv` to `.env` and 
+inject corresponding values into the file.
+```
+GOOGLE_API_KEY={google_api_key}
+APP_HOME={full_path_to_home_folder}
+```
 Register a Google account and create a Google API Key for Gemini here:\
 *https://ai.google.dev/*
 
 # Activate project
 At home folder
 * macOS: `source venv/bin/activate`
+* Windows CMD: `venv\Scripts\activate.bat`
+* Windows PS: `venv\Scripts\Activate.ps1`
 
 # Install all Python packages
 Make sure requirements.txt in the home folder

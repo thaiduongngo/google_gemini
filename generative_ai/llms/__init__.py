@@ -25,46 +25,37 @@ def init_output_format() -> {str: str}:
 
 
 def init_retrieval_template() -> str:
-    return '''
-A text in the List could be mentioned in the Document below.\n
-Response with a complete text of item in the List if there is a mention referred in the Document;
-otherwise response None.\n
-\'Pru\' or \'Pru-\' is a typical prefix to indicate Prudential's products.\n\n
-List: \n{list}\n\n
-Document: \n{document}\n\n
-The output should be a json formatted in the following schema:\n
-\"context\": string  // response
-'''
+    return """
+Response a complete text of item in the ###LIST### if ###DOCUMENT### refers that item in ###LIST###;
+Response the text \"None\" if ###DOCUMENT### do not refer any item in ###LIST###.
+\"Pru\" or \"Pru-\" is a typical prefix to indicate Prudential's products.
+
+###LIST###
+{list}
+
+###DOCUMENT###
+{document}
+
+The Response should be a JSON object, without appending markdown code block such as ```json, in the following schema:
+\"response\": string  // Response
+"""
 
 
-def init_qa_template(lang: str = "en") -> str:
-    if lang == "en":
-        return '''
-You are a professional {role} for {company_name} in {domain}.\n
-Your mission is to precisely and accurately answer customers' questions in {language} language.\n
-You must answer questions by using Context below. Do not hallucinate an answer.\n
-If the answer cannot be found in the Context, say 'Tôi xin lỗi, tôi không tìm thấy thông tin được yêu cầu'\n
-The answer should be formatted and rendered as {output_format}.\n\n
+def init_qa_template() -> str:
+    return """
+You are a professional {role} for {company_name} in {domain}.
+Your task is to precisely answer customers' ###QUESTION### in {language} language.
+You must answer ###QUESTION### with ###CONTEXT###. Do not hallucinate an answer.
+If the answer cannot be found in the ###CONTEXT###, say \"Tôi xin lỗi, tôi không tìm thấy thông tin được yêu cầu\"
 
-Context: \n{context}?\n
-Question: \n{question}\n
-Answer:
-'''
-    elif lang == "vi":
-        return '''
-Bạn là {role} chuyên nghiệp cho {company_name} trong lĩnh vực {domain}.\n
-Bạn có nhiệm vụ trả lời các thắc mắc của khách hàng một cách lịch sự nhất có thể.\n
-Trả lời câu hỏi chính xác nhất có thể bằng {language} và bằng cách sử dụng Context được cung cấp.\n
-Nếu không tìm thấy câu trả lời trong Context, hãy trả lời 'Tôi xin lỗi, tôi không tìm thấy thông tin được yêu cầu'.\n
-Tuyệt đối không suy diễn.\n
-Câu trả lời phải được hiển thị dưới dạng {output_format}.
-\n\n
-Context: \n{context}?\n
-Question: \n{question}\n
-Answer:
-'''
-    else:
-        return ''
+###CONTEXT###
+{context}?
+
+###QUESTION###
+{question}
+
+The answer must be formatted and rendered as {output_format}.
+"""
 
 
 def init_generation_config() -> {}:
