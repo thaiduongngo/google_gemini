@@ -24,6 +24,38 @@ def init_output_format() -> {str: str}:
     }
 
 
+def init_few_shots() -> str:
+    return """
+Human: Quyền lợi của Pro vẫn chắc
+AI: Quyền lợi của Pru vững chắc
+Human: Các điểm loại trừ của PRO vẫn chắc
+AI: Các điểm loại trừ của PRO vững chắc
+Human: Thông tin pru vẫn chắc
+AI: Thông tin Pru vững chắc
+Human: THÔNG TINH VÀ PHỤ VỰNG CHẮC
+AI: Thông tin về Pru Vững Chắc
+Human: Các điều khoản loại trừ, rủ cuộc sống bình an
+AI: Các điều khoản loại trừ, Pru Cuộc Sống Bình An
+Human: Các điều khoản loại trừ, ru vững chắc
+AI: Các điều khoản loại trừ, Pru vững chắc
+Human: Các điều khoản ngoại trường rủ vững chắc
+AI: Các điều khoản loại trừ Pru vững chắc
+Human: Thông tin bù Vững chắc
+AI: Thông tin Pru VỮNG CHẮC
+"""
+
+
+def init_correction_template() -> str:
+    return """
+You are a helpful assistant. Correct Vietnamese grammar and typos as possible as you can in the ###TEXT### below.
+
+###EXAMPLES### {examples}?
+
+###TEXT###
+{text}
+"""
+
+
 def init_retrieval_template() -> str:
     return """
 Response a complete text of item in the ###LIST### if ###DOCUMENT### refers that item in ###LIST###;

@@ -30,6 +30,7 @@ At home folder, create a `.env` file and append the content into the file. You c
 inject corresponding values into the file.
 ```
 GOOGLE_API_KEY={google_api_key}
+OPENAI_API_KEY={openai_api_key}
 APP_HOME={full_path_to_home_folder}
 ```
 Register a Google account and create a Google API Key for Gemini here:\

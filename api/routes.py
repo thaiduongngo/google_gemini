@@ -2,7 +2,6 @@ from flask import Blueprint, request
 from markupsafe import escape
 import api.service as service
 
-
 blueprint = Blueprint("routes", __name__)
 
 
@@ -11,7 +10,7 @@ def home():
     return "<h1>LLM RESTful API</h1>"
 
 
-@blueprint.route("/api/chat", methods=["POST"])
+@blueprint.route("/api/chat/", methods=["POST"])
 def post_chat():
     input_args = request.get_json()
 
@@ -40,3 +39,18 @@ def get_reduce_path(document: str):
 @blueprint.route("/api/chat/history/memory_k/", methods=['GET'])
 def get_memory_k():
     return service.get_memory_k()
+
+
+@blueprint.route("/api/audio/transcription/", methods=['POST'])
+def post_transcribe():
+    input_args = request.get_json()
+
+    if input_args is None:
+        return {"message": "empty payload"}
+
+    b64_string = input_args.get("b64_string")
+
+    if b64_string is None:
+        return {"message": "no b64_string parameter in the payload"}
+
+    return service.transcribe(b64_string=b64_string)

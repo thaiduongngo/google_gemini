@@ -3,12 +3,12 @@ from langchain.vectorstores.pgvector import PGVector
 from langchain.chains import LLMChain
 from langchain.schema import Document
 from generative_ai.llms import init_embeddings, init_retrieval_template, init_llm, init_qa_chain, \
-    init_prompt_template, init_qa_template, init_input_vars, init_output_format
+    init_prompt_template, init_qa_template, init_input_vars, init_output_format, \
+    init_correction_template, init_few_shots
 from generative_ai.configs import LLM_CONFIG, PROMPTS, PERSISTENCE
 import json
 import pandas as pd
 import os
-
 
 HR = "-" * 140
 
@@ -142,3 +142,13 @@ def qna(question: str, chat_history: [{}] = None) -> {str: str}:
         pprint(out_response)
         print(HR)
     return out_response
+
+
+def refine_text(text: str) -> str:
+    llm_chain = LLMChain.from_string(
+        llm=init_llm(),
+        template=init_correction_template(),
+    )
+    llm_chain.verbose = LLM_CONFIG["VERBOSE"]
+    res: str = llm_chain.run({"examples": init_few_shots(), "text": text})
+    return res

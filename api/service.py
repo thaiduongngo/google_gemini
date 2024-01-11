@@ -1,5 +1,7 @@
 from generative_ai.configs import LLM_CONFIG
-from generative_ai.llms.llm import qna, reduce
+from generative_ai.llms.llm import qna, reduce, refine_text
+import generative_ai.audios.audio as audio
+import generative_ai.visions.vision as vision
 
 
 def question_and_answer(
@@ -16,3 +18,13 @@ def reduce_document(document: str) -> str:
 
 def get_memory_k() -> str:
     return "{}".format(LLM_CONFIG["MEMORY_K"])
+
+
+def transcribe(b64_string: str) -> {}:
+    res = audio.transcribe_whisper_b64(b64_string=b64_string)
+    res = refine_text(text=res)
+    return {"response": res}
+
+
+def ocr(b64_string: str) -> str:
+    return vision.ocr(b64_string=b64_string)
